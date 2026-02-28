@@ -19,7 +19,7 @@ export const dbConnect = async()=>
     try {
         
         
-        const {rows} = await pool.query("DROP TABLE urls")
+        const {rows} = await pool.query("SELECT * from urls")
         console.log(rows)
         
 
