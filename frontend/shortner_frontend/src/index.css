@@ -1,0 +1,18 @@
+@import "tailwindcss";
+
+    body {
+    background-color: #F5F5F7;
+    /* Soft off-white */
+    font-family: 'Poppins', sans-serif;
+
+    }
+
+.formcontainer
+{
+  background-image: url('./assets/bg-shorten-desktop.svg'); 
+  background-size: cover;     
+  background-position: center; 
+  background-repeat: no-repeat; 
+  padding: 2rem;
+  background-color: rgba(55, 2, 146, 0.599);
+}
