@@ -8,6 +8,7 @@ const Analytics = () => {
 
   const [limit, setLimit] = useState(10)
   const [links, setLinks] = useState([])
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleFetch = async (e) => {
 
@@ -15,7 +16,7 @@ const Analytics = () => {
 
     try{
 
-         const response = await axios.post("http://localhost:8000/stats",{count:limit})
+         const response = await axios.post(`${apiUrl}/stats`,{count:limit})
 
          if(response)
         {

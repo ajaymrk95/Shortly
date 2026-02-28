@@ -9,7 +9,7 @@ const Shortener = () => {
 
   const [url,setUrl] = useState("")
   const [shortUrl,setShortUrl] = useState()
-
+  const apiUrl = import.meta.env.VITE_API_URL;
 
   const handleSubmit = async (e) =>
   {     
@@ -17,7 +17,7 @@ const Shortener = () => {
 
        try 
        {
-           const response = await axios.post('http://localhost:8000/shorten',{longurl:url})
+           const response = await axios.post(`${apiUrl}/shorten`,{longurl:url})
 
            if(response.data)
            {
@@ -30,6 +30,20 @@ const Shortener = () => {
           console.log(error)
           
        }
+  }
+
+  const handleCopy = async()=>
+  {
+      try {
+            await window.navigator.clipboard.writeText(shortUrl);
+            alert("Short URL Copied to clipboard!");
+        } catch (err) {
+            console.error(
+                "Unable to copy to clipboard.",
+                err
+            );
+            alert("Copy to clipboard failed.");
+        }
   }
 
   return (
@@ -70,10 +84,13 @@ const Shortener = () => {
         {
           shortUrl && 
          <div>
-          Your Short URL is : <a href={shortUrl}>{shortUrl}</a>
+          <p>{shortUrl}</p>
+
+          <button className='px-6 py-3 bg-red-600 text-white font-semibold rounded-md hover:bg-green-700 transition' onClick={handleCopy}>Copy to Clipboard</button>
          </div>
-        
         }
+
+
         </form>
   </div>
 
