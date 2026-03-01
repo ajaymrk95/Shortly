@@ -38,23 +38,11 @@ Create a `backend/.env` with values appropriate for your setup. Do not commit se
 Notes: the exact route prefixes may vary (check [backend/controllers/urlController.js](backend/controllers/urlController.js)). Rate limiting is applied via [backend/middleware/ratelimiter.js](backend/middleware/ratelimiter.js).
 
 
-
 **Development**
 - Use the frontend dev server (Vite) for UI hot-reload: from `frontend` run `npm run dev`.
 - Use `nodemon` in backend for auto-restart while developing (install globally or as a dev dependency): `npx nodemon index.js`.
 - To test end-to-end locally, start backend, then frontend and use the UI to create and open short links.
 
-**Troubleshooting**
-- If redirects fail, confirm backend `PORT` and frontend API base URL match your dev setup.
-- Check database connectivity in `backend/database/pool.js` and confirm migrations/initialization in `backend/database/initdb.js` ran successfully.
-
 **Contributing**
 - Fork, add features or fixes, and send a PR. Keep changes small and focused.
 
-**License**
-- MIT-style (add your preferred license file if desired).
-
-If you'd like, I can also:
-- add a `README` in `backend/` and `frontend/` with service-specific commands,
-- create example `.env.example` files,
-- or add simple tests for the API endpoints.
