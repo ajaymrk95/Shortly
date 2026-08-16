@@ -1,14 +1,29 @@
-import {rateLimit} from 'express-rate-limit'
+import redisclient from '../clientConnect.js';
 
-const rateLimiter = rateLimit({
+const rateLimiter = async (req, res, next) => {
+    const redisKey = `ratelimit:${req.ip}`;
+    const WINDOW_SIZE_MS = 60000; 
+    const MAX_REQUESTS = 10;      
+    
+    const now = Date.now(); 
+    const windowStart = now - WINDOW_SIZE_MS; 
 
-    windowMs:1*60*1000,
-    limit:10,
-    standardHeaders:'draft-8',
-    message:{message:'Too Many Requests! Please wait before trying again'},
-    statusCode:429,
-    legacyHeaders:false
 
-})
+    await redisclient.zRemRangeByScore(redisKey, '-inf', windowStart);
+
+
+    const requestCount = await redisclient.zCard(redisKey);
+
+  
+    if (requestCount >= MAX_REQUESTS) {
+        return res.status(429).json({ error: "Too Many Requests" });
+    }
+
+    
+    await redisclient.zAdd(redisKey, { score: now, value: now.toString() });
+
+    next();
+};
+
 
 export default rateLimiter

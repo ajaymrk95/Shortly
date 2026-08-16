@@ -1,4 +1,4 @@
-import {Pool} from "pg"
+import { Pool } from "pg"
 import dotenv from "dotenv"
 
 dotenv.config()
@@ -7,25 +7,24 @@ const pool = new Pool(
     {
         connectionString: process.env.URI,
         ssl: {
-            rejectUnauthorized:false,
+            rejectUnauthorized: false,
         },
-       
+
     }
 )
 
 
-export const dbConnect = async()=>
-{
+export const dbConnect = async () => {
     try {
-        
-        
-        const {rows} = await pool.query("SELECT * from urls")
-        console.log(rows)
-        
 
-    } 
+
+        const { rows } = await pool.query("SELECT * from urls")
+        console.log(rows)
+
+
+    }
     catch (error) {
-        console.log(error)    
+        console.log(error)
     }
 }
 

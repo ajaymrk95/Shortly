@@ -1,7 +1,6 @@
 import pool from "./pool.js";
 
-const createDB = async()=>
-{
+const createDB = async () => {
     const query = `CREATE TABLE IF NOT EXISTS urls
     (
         id SERIAL PRIMARY KEY,
@@ -12,14 +11,14 @@ const createDB = async()=>
     )`
 
     try {
-        
+
         await pool.query(query);
         console.log("Table Created or Exists")
-        
+
     } catch (error) {
         console
     }
-    
+
 }
 
 export default createDB
